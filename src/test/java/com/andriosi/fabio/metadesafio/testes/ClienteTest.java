@@ -1,55 +1,53 @@
 package com.andriosi.fabio.metadesafio.testes;
 
-import org.junit.jupiter.api.Test;
+import com.andriosi.fabio.metadesafio.entity.Cliente;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-class ClienteTest {
+import java.util.Calendar;
 
-    @Test
-    void getNome() {
+public class ClienteTest {
+    private Cliente cliente;
+
+    public ClienteTest() {
+        this.cliente = new Cliente();
     }
 
     @Test
-    void setNome() {
+    public void getNome() {
+        cliente.setNome("Pedro da Silva");
+        assertEquals("Pedro da Silva",cliente.getNome());
+
     }
 
     @Test
-    void getEmail() {
+    public void getEmail() {
+        cliente.setEmail("test.test@test.com.br");
+        assertEquals("test.test@test.com.br", cliente.getEmail());
     }
 
     @Test
-    void setEmail() {
+    public void getCpf() {
+        cliente.setCpf("12345678900");
+        assertEquals("12345678900", cliente.getCpf());
     }
 
     @Test
-    void getCpf() {
+    public void getDataNacimento() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(1978,3,13);
+        cliente.setDataNacimento(cal);
+        assertEquals("Thu Apr 13 16:09:20 BRT 1978",cliente.getDataNacimento().getTime());
     }
 
     @Test
-    void setCpf() {
+    public void getNaturalidade() {
+        cliente.setNaturalidade("São Paulo");
+        assertEquals("São Paulo", cliente.getNaturalidade());
     }
-
     @Test
-    void getDataNacimento() {
-    }
-
-    @Test
-    void setDataNacimento() {
-    }
-
-    @Test
-    void getNaturalidade() {
-    }
-
-    @Test
-    void setNaturalidade() {
-    }
-
-    @Test
-    void getNacionalidade() {
-    }
-
-    @Test
-    void setNacionalidade() {
+    public void getNacionalidade() {
+        cliente.setNacionalidade("Brasileira");
+        assertEquals("Brasileira", cliente.getNacionalidade());
     }
 }

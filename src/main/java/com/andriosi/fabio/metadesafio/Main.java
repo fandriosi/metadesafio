@@ -1,4 +1,4 @@
-package com.andriosi.fabio.vendas;
+package com.andriosi.fabio.metadesafio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

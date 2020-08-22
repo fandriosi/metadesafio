@@ -1,6 +1,5 @@
-package com.andriosi.fabio.vendas;
+package com.andriosi.fabio.metadesafio;
 
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
