@@ -6,13 +6,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
@@ -20,8 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ClienteRepositoryTest {
-    @Autowired
-    private TestEntityManager testEntityManager;
     @Autowired
     private ClienteRepository clienteRepository;
     @Test
@@ -35,7 +33,21 @@ public class ClienteRepositoryTest {
         clinte.setNaturalidade("São Paulo");
         clinte.setEmail("test.test@teste.com");
         clinte.setCpf("7839393939");
-        testEntityManager.persist(clinte);
+        clienteRepository.save(clinte);
+        List<Cliente> clientes = (List<Cliente>) clienteRepository.findAll();
+        assertEquals("Pedro da Silva", clientes.get(0).getNome());
+        assertEquals("21/04/1978", clientes.get(0).getStrDataNacimento());
+        assertEquals("Brasileira", clientes.get(0).getNacionalidade());
+        assertEquals("São Paulo", clientes.get(0).getNaturalidade());
+        assertEquals("test.test@teste.com", clientes.get(0).getEmail());
+        assertEquals("7839393939", clientes.get(0).getCpf());
+        Cliente cliente = clientes.get(0);
+        cliente.setNome("João de Paula");
+        cliente.setNaturalidade("Pernambuco");
+        clienteRepository.save(cliente);
+        Optional<Cliente> clienteUpdate = clienteRepository.findById(cliente.getId());
+        assertEquals("João de Paula", clienteUpdate.get().getNome());
+        assertEquals("Pernambuco", clienteUpdate.get().getNaturalidade());
     }
 
 }

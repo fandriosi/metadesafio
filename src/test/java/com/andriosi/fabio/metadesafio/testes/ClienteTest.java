@@ -35,9 +35,9 @@ public class ClienteTest {
     @Test
     public void getDataNacimento() {
         Calendar cal = Calendar.getInstance();
-        cal.set(1978,3,13);
+        cal.set(1978,2,13);
         cliente.setDataNacimento(cal);
-        assertEquals("Thu Apr 13 16:09:20 BRT 1978",cliente.getDataNacimento().getTime());
+        assertEquals("13/03/1978",cliente.getStrDataNacimento());
     }
 
     @Test
