@@ -1,5 +1,13 @@
-com/andriosi/fabio/metadesafio/Main.class
+com/andriosi/fabio/metadesafio/util/StrJson.class
+com/andriosi/fabio/metadesafio/controller/Cpf.class
+com/andriosi/fabio/metadesafio/util/Utilities.class
+com/andriosi/fabio/metadesafio/controller/Email.class
 com/andriosi/fabio/metadesafio/repository/ClienteRepository.class
-com/andriosi/fabio/metadesafio/WebConfig.class
+com/andriosi/fabio/metadesafio/controller/CpfValidator.class
+com/andriosi/fabio/metadesafio/controller/CustomGlobalExceptionHandler.class
 com/andriosi/fabio/metadesafio/controller/ClienteController.class
+com/andriosi/fabio/metadesafio/SecurityConfig.class
+com/andriosi/fabio/metadesafio/Main.class
+com/andriosi/fabio/metadesafio/WebConfig.class
+com/andriosi/fabio/metadesafio/controller/EmailValidator.class
 com/andriosi/fabio/metadesafio/entity/Cliente.class

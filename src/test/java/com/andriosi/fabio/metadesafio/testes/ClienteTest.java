@@ -36,8 +36,8 @@ public class ClienteTest {
     public void getDataNacimento() {
         Calendar cal = Calendar.getInstance();
         cal.set(1978,2,13);
-        cliente.setDataNacimento(cal);
-        assertEquals("13/03/1978",cliente.getStrDataNacimento());
+        cliente.setDataNascimento(cal);
+        assertEquals("13/03/1978",cliente.getStrDataNascimento());
     }
 
     @Test

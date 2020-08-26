@@ -1,10 +1,11 @@
 package com.andriosi.fabio.metadesafio.entity;
 
+import com.andriosi.fabio.metadesafio.controller.Cpf;
+import com.andriosi.fabio.metadesafio.controller.Email;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 
 @Entity
@@ -13,16 +14,18 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
+    @NotEmpty(message = "O nome do Cliente não pode ser nulo!")
     private String nome;
+    @Email
     private String email;
+    @Cpf
     private String cpf;
     @Temporal(TemporalType.DATE)
-    private Calendar dataNacimento;
+    private Calendar dataNascimento;
     private String naturalidade;
     private String nacionalidade;
     @Transient
-    private String strDataNacimento;
+    private String strDataNascimento;
 
     public Long getId() {
         return id;
@@ -56,12 +59,12 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public Calendar getDataNacimento() {
-        return dataNacimento;
+    public Calendar getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setDataNacimento(Calendar dataNacimento) {
-        this.dataNacimento = dataNacimento;
+    public void setDataNascimento(Calendar dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getNaturalidade() {
@@ -80,13 +83,13 @@ public class Cliente {
         this.nacionalidade = nacionalidade;
     }
 
-    public String getStrDataNacimento() {
+    public String getStrDataNascimento() {
         SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
-        this.strDataNacimento = format1.format(this.dataNacimento.getTime());
-        return strDataNacimento;
+        this.strDataNascimento = format1.format(this.dataNascimento.getTime());
+        return strDataNascimento;
     }
 
-    public void setStrDataNacimento(String strDataNacimento) {
-        this.strDataNacimento = strDataNacimento;
+    public void setStrDataNascimento(String strDataNascimento) {
+        this.strDataNascimento = strDataNascimento;
     }
 }

@@ -1,5 +1,13 @@
 /home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/controller/ClienteController.java
 /home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/repository/ClienteRepository.java
 /home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/entity/Cliente.java
-/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/Main.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/controller/EmailValidator.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/util/Utilities.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/controller/CpfValidator.java
 /home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/WebConfig.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/SecurityConfig.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/util/StrJson.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/Main.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/controller/CustomGlobalExceptionHandler.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/controller/Email.java
+/home/andriosi/IdeaProjects/metadesafio/src/main/java/com/andriosi/fabio/metadesafio/controller/Cpf.java
