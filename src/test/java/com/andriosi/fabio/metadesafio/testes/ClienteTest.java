@@ -4,6 +4,8 @@ import com.andriosi.fabio.metadesafio.entity.Cliente;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ClienteTest {
@@ -33,11 +35,12 @@ public class ClienteTest {
     }
 
     @Test
-    public void getDataNacimento() {
+    public void getDataNacimento() throws ParseException {
         Calendar cal = Calendar.getInstance();
         cal.set(1978,2,13);
         cliente.setDataNascimento(cal);
-        assertEquals("13/03/1978",cliente.getStrDataNascimento());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        assertEquals("13/03/1978", format.format(cliente.getDataNascimento().getTime()));
     }
 
     @Test

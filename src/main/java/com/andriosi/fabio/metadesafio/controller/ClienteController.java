@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 @RestController
 @RequestMapping("/resources")
 public class ClienteController {
@@ -24,28 +27,28 @@ public class ClienteController {
         repository.findAll().forEach(list::add);
         return new ResponseEntity<>(list, HttpStatus.OK );
     }
-    @RolesAllowed("ADMIN")
-    @PostMapping(value = "/cliente")
-    public @ResponseBody ResponseEntity<List<Cliente>>  addCliente(@Valid @RequestBody Cliente Cliente){
-        repository.save(Cliente);
-        List<Cliente> list = new ArrayList<>();
-        repository.findAll().forEach(list::add);
-        return new ResponseEntity<>(list, HttpStatus.OK );
+    @PostMapping(value = "/clientes")
+    public @ResponseBody ResponseEntity<Cliente>  addCliente(@Valid @RequestBody Cliente cliente) {
+        return new ResponseEntity<>(repository.save(cliente), HttpStatus.OK );
     }
-    @DeleteMapping(value = "/cliente")
-    public @ResponseBody ResponseEntity<List<Cliente>>  deleteClintes(@RequestBody Cliente Cliente){
-        repository.delete(Cliente);
-        List<Cliente> list = new ArrayList<>();
-        repository.findAll().forEach(list::add);
-        return new ResponseEntity<>(list, HttpStatus.OK );
+    @DeleteMapping(value = "/clientes/{id}")
+    public @ResponseBody ResponseEntity<Map<String, Boolean>> deleteClintes(@PathVariable(value = "id") Long id ){
+        Optional<Cliente> cliente = repository.findById(id);
+        repository.delete(cliente.get());
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return new ResponseEntity<>(response, HttpStatus.OK );
     }
 
-    @PutMapping(value = "/cliente")
-    public @ResponseBody ResponseEntity<List<Cliente>>  updateCliente(@RequestBody Cliente Cliente){
-        repository.save(Cliente);
-        List<Cliente> list = new ArrayList<>();
-        repository.findAll().forEach(list::add);
-        return new ResponseEntity<>(list, HttpStatus.OK );
-
+    @PutMapping(value = "/clientes")
+    public @ResponseBody ResponseEntity<Cliente>  updateCliente(@Valid @RequestBody Cliente cliente){
+        repository.save(cliente);
+        Optional<Cliente> c = repository.findById(cliente.getId());
+        return new ResponseEntity<>(c.get(), HttpStatus.OK );
+    }
+    @GetMapping("/clientes/{id}")
+    public @ResponseBody ResponseEntity<Cliente> findById(@PathVariable(value = "id") Long id){
+        Optional<Cliente> cliente = repository.findById(id);
+        return new ResponseEntity<>(cliente.get(), HttpStatus.OK);
     }
 }

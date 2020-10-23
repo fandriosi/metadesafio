@@ -19,6 +19,8 @@ import javax.websocket.RemoteEndpoint;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -29,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ClienteControllerTest {
     private Cliente cliente;
+    private String url ="/resources/clientes";
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -50,8 +53,8 @@ public class ClienteControllerTest {
         Cliente c = this.cliente;
         c.setCpf("854048580");
         String json = new Utilities().getJson(c);
-        mockMvc.perform(MockMvcRequestBuilders.post("/resources/cliente")
-                .header(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46YWRtaW4=")
+        mockMvc.perform(MockMvcRequestBuilders.post(url)
+                .header(HttpHeaders.AUTHORIZATION, "Basic TWV0YTpkZXNhZmlv")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json))
@@ -62,8 +65,8 @@ public class ClienteControllerTest {
         Cliente c = this.cliente;
         c.setEmail("fdkasldfsad.dladlkj.dadl");
         String json = new Utilities().getJson(c);
-        mockMvc.perform(MockMvcRequestBuilders.post("/resources/cliente")
-                .header(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46YWRtaW4=")
+        mockMvc.perform(MockMvcRequestBuilders.post(url)
+                .header(HttpHeaders.AUTHORIZATION, "Basic TWV0YTpkZXNhZmlv")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json))
@@ -72,19 +75,18 @@ public class ClienteControllerTest {
     @Test
     public void testControllerC() throws Exception{
         String json = new Utilities().getJson(this.cliente);
-        mockMvc.perform(MockMvcRequestBuilders.post("/resources/cliente")
-                .header(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46YWRtaW4=")
+        mockMvc.perform(MockMvcRequestBuilders.post(url)
+                .header(HttpHeaders.AUTHORIZATION, "Basic TWV0YTpkZXNhZmlv")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].nome", is("Joaquim Barbosa")));
+                .andExpect(jsonPath("$.nome", is("Joaquim Barbosa")));
     }
     @Test
     public void testControllerD() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/resources/clientes")
-                .header(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46YWRtaW4=")
+        mockMvc.perform(MockMvcRequestBuilders.get(url)
+                .header(HttpHeaders.AUTHORIZATION, "Basic TWV0YTpkZXNhZmlv")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -94,28 +96,37 @@ public class ClienteControllerTest {
     public void testControllerF() throws Exception {
         List<Cliente> list = (List<Cliente>) repository.findAll();
         Cliente c = list.get(0);
-        c.setNome("Pedro dos Santos");
-        String json = new Utilities().getJson(c);
-        mockMvc.perform(MockMvcRequestBuilders.put("/resources/cliente")
-                .header(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46YWRtaW4=")
+        mockMvc.perform(MockMvcRequestBuilders.get(url.concat("/").concat(String.valueOf(c.getId())))
+                .header(HttpHeaders.AUTHORIZATION, "Basic TWV0YTpkZXNhZmlv")
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].nome", is("Pedro dos Santos")));
+                .andExpect(jsonPath("$.nome", is("Joaquim Barbosa")));;
     }
     @Test
     public void testControllerG() throws Exception {
         List<Cliente> list = (List<Cliente>) repository.findAll();
         Cliente c = list.get(0);
+        c.setNome("Pedro dos Santos");
         String json = new Utilities().getJson(c);
-        mockMvc.perform(MockMvcRequestBuilders.delete("/resources/cliente")
-                .header(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46YWRtaW4=")
+        mockMvc.perform(MockMvcRequestBuilders.put(url)
+                .header(HttpHeaders.AUTHORIZATION, "Basic TWV0YTpkZXNhZmlv")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
+                .andExpect(jsonPath("$.nome", is("Pedro dos Santos")));
+    }
+    @Test
+    public void testControllerH() throws Exception {
+        List<Cliente> list = (List<Cliente>) repository.findAll();
+        Cliente c = list.get(0);
+        String json = new Utilities().getJson(c);
+        mockMvc.perform(MockMvcRequestBuilders.delete(url.concat("/").concat(String.valueOf(c.getId())))
+                .header(HttpHeaders.AUTHORIZATION, "Basic TWV0YTpkZXNhZmlv")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", is(true)));
     }
 }

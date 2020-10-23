@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ClienteRepositoryTest {
+    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     @Autowired
     private ClienteRepository clienteRepository;
     @Test
@@ -36,7 +38,7 @@ public class ClienteRepositoryTest {
         clienteRepository.save(clinte);
         List<Cliente> clientes = (List<Cliente>) clienteRepository.findAll();
         assertEquals("Pedro da Silva", clientes.get(0).getNome());
-        assertEquals("21/04/1978", clientes.get(0).getStrDataNascimento());
+        assertEquals("21/04/1978", format.format(clientes.get(0).getDataNascimento().getTime()));
         assertEquals("Brasileira", clientes.get(0).getNacionalidade());
         assertEquals("São Paulo", clientes.get(0).getNaturalidade());
         assertEquals("test.test@teste.com", clientes.get(0).getEmail());

@@ -24,8 +24,6 @@ public class Cliente {
     private Calendar dataNascimento;
     private String naturalidade;
     private String nacionalidade;
-    @Transient
-    private String strDataNascimento;
 
     public Long getId() {
         return id;
@@ -83,13 +81,4 @@ public class Cliente {
         this.nacionalidade = nacionalidade;
     }
 
-    public String getStrDataNascimento() {
-        SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
-        this.strDataNascimento = format1.format(this.dataNascimento.getTime());
-        return strDataNascimento;
-    }
-
-    public void setStrDataNascimento(String strDataNascimento) {
-        this.strDataNascimento = strDataNascimento;
-    }
 }
